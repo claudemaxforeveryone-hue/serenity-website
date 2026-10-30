@@ -133,7 +133,7 @@ p { margin: 0; }
 
 /* Hero */
 .hero {
-  display: grid; grid-template-columns: 0.85fr 1.15fr; align-items: center; gap: 1.5rem;
+  display: grid; grid-template-columns: 0.92fr 1.08fr; align-items: center; gap: 1.75rem;
   min-height: calc(100dvh - 92px);
   padding-block: 2rem 4rem;
 }
@@ -412,7 +412,7 @@ h1 { margin-top: 1.25rem; font-weight: 400; }
 .section-lede a { color: var(--head); text-underline-offset: 3px; }
 
 /* Hero collage, laid out like the report cover */
-.hero-art { position: relative; aspect-ratio: 1 / 0.98; margin-right: -3%; }
+.hero-art { position: relative; aspect-ratio: 1 / 0.98; margin-right: -1.5%; }
 .hero-art .layer { transition: transform 1.2s var(--ease); will-change: transform; }
 .hero-logo { position: absolute; height: 96%; width: auto; right: -14%; top: 0; opacity: 0.35; }
 @media (prefers-color-scheme: dark) { .hero-logo { opacity: 0.3; filter: brightness(1.6); } }
