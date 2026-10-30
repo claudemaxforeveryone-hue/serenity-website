@@ -581,3 +581,45 @@ h1 { margin-top: 1.25rem; font-weight: 400; }
 }
 .quote footer .who { display: inline-flex; align-items: center; gap: 0.5rem; font-weight: 600; color: var(--text); font-size: inherit; }
 .safer .org-icon { width: 20px; height: 20px; border-radius: 5px; aspect-ratio: auto; display: inline-block; }
+
+/* Language picker */
+.nav { justify-content: flex-start; gap: 1rem; }
+.nav-links { margin-left: auto; }
+.lang { position: relative; }
+.lang-btn {
+  display: inline-flex; align-items: center; gap: 0.4rem;
+  background: none; border: 1.5px solid var(--line); border-radius: 999px;
+  padding: 0.4rem 0.75rem; font: 500 0.85rem var(--sans); color: var(--text); cursor: pointer;
+  transition: border-color 200ms, color 200ms;
+}
+.lang-btn:hover, .lang-btn[aria-expanded="true"] { border-color: var(--accent); color: var(--head); }
+.lang-chev { transition: transform 250ms var(--ease); }
+.lang-btn[aria-expanded="true"] .lang-chev { transform: rotate(180deg); }
+.lang-menu {
+  position: absolute; top: calc(100% + 0.5rem); inset-inline-end: 0; z-index: 30;
+  list-style: none; margin: 0; padding: 0.4rem; min-width: 11rem;
+  background: var(--surface); border: 1px solid var(--line); border-radius: 12px;
+  box-shadow: 0 24px 48px -24px rgb(40 36 80 / 0.45);
+  animation: lang-in 220ms var(--ease);
+}
+.lang-menu[hidden] { display: none; }
+@keyframes lang-in { from { opacity: 0; transform: translateY(-6px); } }
+.lang-menu button {
+  display: block; width: 100%; text-align: start;
+  background: none; border: 0; border-radius: 8px; padding: 0.5rem 0.75rem;
+  font: 400 0.92rem/1.3 var(--sans); color: var(--text); cursor: pointer;
+}
+.lang-menu button:hover, .lang-menu button:focus-visible { background: var(--paper); outline: none; }
+.lang-menu button[aria-current="true"] { color: var(--head); font-weight: 600; }
+.lang-menu button[aria-current="true"]::after { content: ""; float: inline-end; width: 6px; height: 6px; margin-top: 0.45em; border-radius: 50%; background: var(--accent); }
+@media (max-width: 860px) {
+  .lang { margin-left: auto; }
+  .menu-btn { order: 3; }
+}
+
+/* Other scripts: fall back to fonts that have the glyphs */
+:lang(fa) { --sans: "Vazirmatn", Tahoma, system-ui, sans-serif; }
+:lang(fa) body, :lang(zh-Hans) body, :lang(zh-Hant) body, :lang(ko) body { line-height: 1.8; }
+:lang(fa) .wordmark, :lang(fa) .brand, :lang(fa) .strip { direction: ltr; }
+.rtl-text :is(p, h1, h2, h3, li, dt, dd, blockquote, figcaption, summary, .claim, .explain) { direction: rtl; }
+.rtl-text :is(.wordmark, .brand, .nav-links li, .brave-letters, .marquee-track li, .rise-letter) { direction: ltr; }

@@ -1,6 +1,8 @@
 (() => {
   const root = document.documentElement;
   const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const tr = (s) => (window.i18n ? window.i18n.t(s) : s);
+  const onLang = (f) => window.i18n && window.i18n.on(f);
 
   // Colour grading: each section shifts the accent one step along
   // the report's lavender-to-indigo strip.
@@ -9,12 +11,15 @@
   const last = Math.max(...[...toneSections].map((s) => Number(s.dataset.tone) || 0)) || 1;
   const gradeAt = (t) => "rgb(" + from.map((c, i) => Math.round(c + (to[i] - c) * (t / last))).join(" ") + ")";
   const stripLabel = document.getElementById("stripSection");
+  let stripKey = "Welcome";
+  onLang(() => { if (stripLabel) stripLabel.textContent = tr(stripKey); });
   const toneObserver = new IntersectionObserver((entries) => {
     entries.forEach((e) => {
       if (!e.isIntersecting) return;
       const t = Number(e.target.dataset.tone) || 0;
       root.style.setProperty("--accent", gradeAt(t));
-      if (stripLabel) stripLabel.textContent = e.target.dataset.label || "";
+      stripKey = e.target.dataset.label || "";
+      if (stripLabel) stripLabel.textContent = tr(stripKey);
     });
   }, { rootMargin: "-45% 0px -45% 0px" });
   toneSections.forEach((s) => toneObserver.observe(s));
@@ -85,13 +90,15 @@
   ];
   const tabs = [...document.querySelectorAll(".brave-letters button")];
   const panel = document.getElementById("bravePanel");
+  let goal = 0;
   const setGoal = (i) => {
+    goal = i;
     tabs.forEach((t, j) => t.setAttribute("aria-selected", String(i === j)));
     const g = goals[i];
-    document.getElementById("braveWord").textContent = g.word;
+    document.getElementById("braveWord").textContent = tr(g.word);
     document.getElementById("braveNum").textContent = g.num;
-    document.getElementById("braveUnit").textContent = g.unit;
-    document.getElementById("braveText").textContent = g.text;
+    document.getElementById("braveUnit").textContent = tr(g.unit);
+    document.getElementById("braveText").textContent = tr(g.text);
     panel.classList.remove("swap"); void panel.offsetWidth; panel.classList.add("swap");
   };
   tabs.forEach((t, i) => {
@@ -102,6 +109,11 @@
       const n = (i + (e.key === "ArrowRight" ? 1 : tabs.length - 1)) % tabs.length;
       tabs[n].focus(); setGoal(n);
     });
+  });
+
+  onLang(() => {
+    if (tabs.some((x) => x.getAttribute("aria-selected") === "true")) setGoal(goal);
+    document.querySelectorAll(".next-hint").forEach((b) => (b.textContent = tr(b.dataset.key)));
   });
 
   // Myth or fact deck
@@ -153,7 +165,8 @@
         scoreEl.textContent = score;
         const go = document.createElement("button");
         go.className = "next-hint";
-        go.textContent = current === cards.length - 1 ? "See your score" : "Next statement";
+        go.dataset.key = current === cards.length - 1 ? "See your score" : "Next statement";
+        go.textContent = tr(go.dataset.key);
         go.addEventListener("click", next);
         card.appendChild(go);
         go.focus({ preventScroll: true });
