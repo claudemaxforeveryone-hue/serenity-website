@@ -579,3 +579,5 @@ h1 { margin-top: 1.25rem; font-weight: 400; }
   .marquee { overflow-x: auto; }
   .marquee-track li[aria-hidden] { display: none; }
 }
+.quote footer .who { display: inline-flex; align-items: center; gap: 0.5rem; font-weight: 600; color: var(--text); font-size: inherit; }
+.safer .org-icon { width: 20px; height: 20px; border-radius: 5px; aspect-ratio: auto; display: inline-block; }
