@@ -133,7 +133,7 @@ p { margin: 0; }
 
 /* Hero */
 .hero {
-  display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: 2rem;
+  display: grid; grid-template-columns: 0.85fr 1.15fr; align-items: center; gap: 1.5rem;
   min-height: calc(100dvh - 92px);
   padding-block: 2rem 4rem;
 }
@@ -412,7 +412,7 @@ h1 { margin-top: 1.25rem; font-weight: 400; }
 .section-lede a { color: var(--head); text-underline-offset: 3px; }
 
 /* Hero collage, laid out like the report cover */
-.hero-art { position: relative; aspect-ratio: 1 / 0.98; }
+.hero-art { position: relative; aspect-ratio: 1 / 0.98; margin-right: -3%; }
 .hero-art .layer { transition: transform 1.2s var(--ease); will-change: transform; }
 .hero-logo { position: absolute; height: 96%; width: auto; right: -14%; top: 0; opacity: 0.35; }
 @media (prefers-color-scheme: dark) { .hero-logo { opacity: 0.3; filter: brightness(1.6); } }
@@ -541,7 +541,7 @@ h1 { margin-top: 1.25rem; font-weight: 400; }
 .lightbox[open] img { animation: pop 450ms var(--ease); }
 
 @media (max-width: 860px) {
-  .hero-art { order: -1; max-width: 420px; width: 100%; margin-inline: auto; overflow: clip; overflow-clip-margin: 0; }
+  .hero-art { order: -1; max-width: 480px; width: 100%; margin-inline: auto; overflow: clip; overflow-clip-margin: 0; }
   .about, .advisor-grid, .event { grid-template-columns: 1fr; }
   .portraits figure:nth-child(3n+2) { translate: none; }
   .portraits figcaption { font-size: 0.95rem; }
