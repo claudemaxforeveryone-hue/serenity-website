@@ -359,11 +359,7 @@ h1 { margin-top: 1.25rem; font-weight: 400; }
 @media (prefers-reduced-motion: no-preference) {
   .js .reveal { opacity: 0; transform: translateY(24px); transition: opacity 900ms var(--ease), transform 900ms var(--ease); }
   .js .reveal.in { opacity: 1; transform: none; }
-  .js .hero-art > .shot { opacity: 0; animation: rise 1.2s var(--ease) forwards; }
-  .js .swirl .draw { stroke-dasharray: 1; stroke-dashoffset: 1; animation: draw 2.6s var(--ease) forwards; }
-  .js .swirl .d2 { animation-delay: 0.35s; }
-  .js .swirl .d3 { animation-delay: 0.9s; animation-duration: 2s; }
-  @keyframes draw { to { stroke-dashoffset: 0; } }
+  .js .hero-art > * { opacity: 0; animation: rise 1.2s var(--ease) forwards; }
   .js .hero-art .shot-main { animation-delay: 0.15s; }
   .js .hero-art .shot-a { animation-delay: 0.35s; }
   .js .hero-art .shot-b { animation-delay: 0.5s; }
@@ -418,17 +414,13 @@ h1 { margin-top: 1.25rem; font-weight: 400; }
 /* Hero collage, laid out like the report cover */
 .hero-art { position: relative; aspect-ratio: 1 / 1.02; }
 .hero-art .layer { transition: transform 1.2s var(--ease); will-change: transform; }
-.swirl { position: absolute; right: -12%; top: -4%; height: 108%; width: auto; overflow: visible; }
-.swirl path { fill: none; stroke: url(#grade); stroke-linecap: round; stroke-width: 16; }
-.swirl .thin { stroke-width: 9; }
-.swirl .hair { stroke-width: 2.5; opacity: 0.6; }
-.swirl g { transition: transform 1.2s var(--ease); will-change: transform; }
-@media (prefers-color-scheme: dark) { .swirl path { opacity: 0.85; } }
+.hero-logo { position: absolute; height: 92%; width: auto; right: -4%; top: 2%; opacity: 0.35; }
+@media (prefers-color-scheme: dark) { .hero-logo { opacity: 0.3; filter: brightness(1.6); } }
 .shot { position: absolute; margin: 0; border-radius: var(--radius); overflow: hidden; box-shadow: 0 30px 60px -30px rgb(63 66 112 / 0.55); background: var(--mist); }
 .shot img { width: 100%; height: 100%; object-fit: cover; }
-.shot-main { left: 0; top: 8%; width: 70%; aspect-ratio: 2 / 1.2; }
-.shot-a { left: 6%; bottom: 10%; width: 40%; aspect-ratio: 4 / 3; }
-.shot-b { left: 50%; bottom: 2%; width: 30%; aspect-ratio: 4 / 3; }
+.shot-main { left: 0; top: 6%; width: 86%; aspect-ratio: 2 / 1.15; }
+.shot-a { left: 6%; bottom: 6%; width: 46%; aspect-ratio: 4 / 3; }
+.shot-b { right: 2%; bottom: 18%; width: 38%; aspect-ratio: 4 / 3; }
 
 
 .ring-fig figcaption { margin-top: 1rem; text-align: center; font-size: 0.85rem; color: var(--muted); }
@@ -550,7 +542,6 @@ h1 { margin-top: 1.25rem; font-weight: 400; }
 
 @media (max-width: 860px) {
   .hero-art { order: -1; max-width: 420px; width: 100%; margin-inline: auto; overflow: clip; overflow-clip-margin: 0; }
-  .swirl { right: -4%; }
   .about, .advisor-grid, .event { grid-template-columns: 1fr; }
   .portraits figure:nth-child(3n+2) { translate: none; }
   .portraits figcaption { font-size: 0.95rem; }
