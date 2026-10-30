@@ -252,8 +252,8 @@
   document.addEventListener("click", (e) => {
     const img = e.target.closest("img[data-zoom]");
     if (!img || dragged) { dragged = false; return; }
-    group = [...img.closest(".mosaic, .track").querySelectorAll("img[data-zoom]")];
-    idx = group.indexOf(img);
+    group = [...img.closest(".mosaic, .marquee").querySelectorAll("img[data-zoom]")].filter((i) => !i.closest("[aria-hidden]"));
+    idx = Math.max(0, group.findIndex((i) => i.src === img.src));
     show();
     lb.showModal();
   });
@@ -268,6 +268,7 @@
     }
   });
   document.querySelectorAll("img[data-zoom]").forEach((img) => {
+    if (img.closest("[aria-hidden]")) return;
     img.tabIndex = 0;
     img.addEventListener("keydown", (e) => { if (e.key === "Enter") img.click(); });
   });
